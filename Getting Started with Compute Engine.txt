@@ -1,0 +1,39 @@
+Task 1: Sign in to the Google Cloud Platform (GCP) Console
+    log on to console.gloud.google.com
+
+Task 2: Create a virtual machine using the GCP Console
+    gcloud beta compute --project=qwiklabs-gcp-03-3af7b214fe26 instances create my-vm-1 \
+    --zone=us-central1-a \
+    --machine-type=e2-medium \
+    --subnet=default \
+    --network-tier=PREMIUM \
+    --maintenance-policy=MIGRATE \
+    --service-account=492720826442-compute@developer.gserviceaccount.com \
+    --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
+    --tags=http-server \
+    --image=debian-9-stretch-v20200910 \
+    --image-project=debian-cloud \
+    --boot-disk-size=10GB \
+    --boot-disk-type=pd-standard \
+    --boot-disk-device-name=my-vm-1 \
+    --reservation-affinity=any
+
+Task 3: Create a virtual machine using the gcloud command line
+    gcloud compute zones list | grep us-central1
+    gcloud config set compute/zone us-central1-b
+    gcloud compute instances create "my-vm-2" \
+    --machine-type "n1-standard-1" \
+    --image-project "debian-cloud" \
+    --image "debian-9-stretch-v20190213" \
+    --subnet "default"
+    exit
+
+Task 4: Connect between VM instances
+    ping my-vm-1
+    ssh my-vm-1
+    sudo apt-get install nginx-light -y
+    sudo nano /var/www/html/index.nginx-debian.html
+        Hi from Ayo_Omole
+    curl http://localhost/
+    exit
+    curl http://my-vm-1/
